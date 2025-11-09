@@ -1,6 +1,6 @@
-# Intelligent Document Assistant (MVP)
+# Intelligent Document Assistant (MVP) + Web UI
 
-Minimal FastAPI + LangChain RAG app using FAISS and OpenAI.
+Minimal FastAPI + LangChain RAG app using FAISS and OpenAI, with a Vite React frontend.
 
 Checks the required checkpoints:
 - Upload multiple document formats (PDF, DOCX, TXT, MD)
@@ -12,11 +12,12 @@ Checks the required checkpoints:
 
 ## Requirements
 - Python 3.11+
+- Node.js 18+
 - OpenAI API key
 
 ## Quickstart (local)
 
-1) Create venv and install deps
+Backend (FastAPI)
 
 Windows PowerShell:
 ```powershell
@@ -24,10 +25,20 @@ python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 pip install -r requirements.txt
 $env:OPENAI_API_KEY="YOUR_KEY_HERE"
-uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+uvicorn backend.main:app --reload --host 0.0.0.0 --port 8000
 ```
 
-2) Open API docs at http://localhost:8000/docs
+Frontend (Vite React)
+```powershell
+cd frontend
+npm install
+npm run dev -- --port 3000
+```
+
+Open UI: http://localhost:3000
+Open API docs: http://localhost:8000/docs
+
+Note: Backend CORS currently allows only http://localhost:3000. To use Vite’s default port (5173), update the allowed origins in the backend or run dev on port 3000 as shown.
 
 ## API Walkthrough
 
@@ -79,7 +90,7 @@ Build and run:
 docker build -t doc-assistant:latest .
 docker run --rm -it -p 8000:8000 -e OPENAI_API_KEY=YOUR_KEY doc-assistant:latest
 ```
-Open http://localhost:8000/docs
+Open http://localhost:8000/docs (API). The frontend runs separately (see Quickstart).
 
 ## Elastic Beanstalk (single container)
 
@@ -97,6 +108,10 @@ Note: EB instance storage is ephemeral. This MVP uses per-session in-memory FAIS
 ## Configuration
 - Env vars:
   - `OPENAI_API_KEY` (required)
+  - `OPENAI_BASE_URL` (optional; override API base URL if using a non-default endpoint)
+  - Frontend: `VITE_API_BASE` (optional; defaults to http://localhost:8000)
+
+- CORS: backend allows `http://localhost:3000` by default. Either run the Vite dev server on port 3000 or add `http://localhost:5173` to allowed origins in the backend.
 
 ## Design notes
 - Per-session architecture (simple, no cross-user leaks)
