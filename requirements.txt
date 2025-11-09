@@ -1,0 +1,13 @@
+fastapi==0.115.0
+uvicorn==0.30.6
+langchain==0.2.14
+langchain-community==0.2.11
+langchain-openai==0.1.21
+langchain-text-splitters==0.2.2
+faiss-cpu==1.8.0.post1
+python-multipart==0.0.9
+pydantic==2.8.2
+pypdf==4.3.1
+docx2txt==0.8
+python-dotenv==1.0.1
+chardet

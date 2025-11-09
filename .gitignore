@@ -1,0 +1,7 @@
+.venv
+Dockerfile
+.dockerignore   
+.env
+node_modules
+__pycache__
+
