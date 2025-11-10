@@ -39,7 +39,7 @@ export default function App() {
   const [selectedCitations, setSelectedCitations] = useState<Citation[]>([]);
   const [uploadResetKey, setUploadResetKey] = useState(0);
 
-  const API_BASE: string = (import.meta as any)?.env?.VITE_API_BASE || 'http://localhost:8000';
+  const API_BASE: string = (import.meta as any)?.env?.VITE_API_BASE ?? '/api';
 
   // Bootstrap session on mount
   useEffect(() => {

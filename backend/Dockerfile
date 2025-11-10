@@ -7,8 +7,8 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 WORKDIR /app
 
 # System deps required by faiss-cpu
-RUN apt-get update \ 
-    && apt-get install -y --no-install-recommends libgomp1 \ 
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends libgomp1 \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Python dependencies
